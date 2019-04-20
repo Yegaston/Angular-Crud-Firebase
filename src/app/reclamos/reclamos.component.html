@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <h1>Listado</h1>
+        <table class="table table-sm table-hover">
+          <thead>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Accions</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of reclamosList">
+              <td>{{item.title}}</td>
+              <td>{{item.text}}</td>
+              <td>{{item.location}}</td>
+              <td>
+                <a class="btn" (click)="edit(item)"><i class="fa fa-pencil-square-o">Edit</i></a>
+                <a class="btn"><i class="fa fa-trash-square-o" (click)="delete(item.$key)">Delete</i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <h1>Formulario</h1>
+        <form #reclamoForm="ngForm" (ngSubmit)="onSubmit(reclamoForm)">
+          <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="reclamoService.selectedReclamo.$key">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" #name="ngModel"
+              [(ngModel)]="reclamoService.selectedReclamo.title" required>
+          </div>
+          <div class="form-group">
+            <label>Text</label>
+            <input type="text" name="text" class="form-control" #name="ngModel"
+              [(ngModel)]="reclamoService.selectedReclamo.text" required>
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" name="location" class="form-control" #name="ngModel"
+              [(ngModel)]="reclamoService.selectedReclamo.licatuib">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-default" type="submit" [disabled]="!reclamoForm.valid">
+              <i class="fa fa-floppy-o"></i>Save
+            </button>
+            <button class="btn btn-default" type="button" (click)="resetForm(reclamoForm)">
+              <i class="fa fa-repeat"></i>Clear
+            </button>
+          </div>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+</div>
